@@ -1,0 +1,39 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class fileCopy {
+    public static void main(String[] args) throws Exception{ 
+        String inputFile, outputFile;
+    	BufferedWriter outputWriter = null;
+        FileWriter fw = null;
+       
+        Scanner in = new Scanner(System.in);
+        try {
+        	System.out.println("Enter input file name: "); 
+        	inputFile = in.nextLine();
+        	System.out.println("Enter output file name: ");
+        	outputFile = in.nextLine();
+        	
+        	Scanner inputReader = new Scanner(new File(inputFile));
+            fw = new FileWriter(outputFile);
+            outputWriter = new BufferedWriter(fw);
+            String line;
+
+            while(inputReader.hasNext()){
+                line = inputReader.nextLine();
+                outputWriter.write(line+"\n");
+            }
+            outputWriter.close();
+            inputReader.close();  
+            in.close();
+        }
+        catch (IOException e) {
+			System.out.println("File does not exist!");
+			System.exit(0);
+        }
+        System.out.println("Your file has been copied.");
+    }
+}
